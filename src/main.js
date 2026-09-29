@@ -38,8 +38,9 @@ connectMongoDB()
 // FILTRAR POR ID -->
 // DEVUELVE UN OBJETO O NULL -->
 
-let userId = '6ab281bc46168e38573e69ca'
-let workspaceId = '6ab28507d0ae8c82e00e5bee'
+/*let userId = '6ab281bc46168e38573e69ca'
+let workspaceId = '6ab28507d0ae8c82e00e5bee'*/
+
 /*memberRepository.create(
   userId,
   workspaceId,
@@ -53,5 +54,30 @@ let workspaceId = '6ab28507d0ae8c82e00e5bee'
 )*/
 
 
+/*
+Hacer un sertivdor http con NODE.js
+Para esto usaremos una libreria. express.js. Otra opcion con TS podria se nest.js o fastify con JS.
+*/
+import express from 'express'
+//Se crea una app de express
+const app = express()
+const PORT = 8080
+/*
+Si me hacen un GET a la direccion '/api/atatus' activar tal funcion -->
+*/
+app.get('/api/status',
+  (request, response) => {
+    response.send('<h1> Request recibida </h1>')
+  }
+
+)
+
+app.listen(
+  // Si fuinciono el listen del server entonces se ejecutara esta funcion
+  PORT,
+  () => {
+    console.log(`El servidor se esta ejecutando en http://localhost${PORT}`)
+  }
+)
 
 
