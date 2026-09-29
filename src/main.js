@@ -17,7 +17,7 @@ import connectMongoDB from "./config/mongo.config.js";
 
 // Importar clases
 import WorkSpace from "./models/workspace.model.js";
-//import User from "./models/users.models.js";
+import User from "./models/users.models.js";
 import userRepository from "./repositories/user.repository.js";
 import memberRepository from "./repositories/member.repository.js";
 import workspaceRepository from "./repositories/workspace.repository.js";
@@ -62,16 +62,87 @@ import express from 'express'
 //Se crea una app de express
 const app = express()
 const PORT = 8080
+
+
+// Traer usuarios de la DB
+/*app.get('/api/users',
+  async (request, response) => {
+    try {
+      const userList = await userRepository.getUsers()
+      response.send({
+        message: 'Get users list',
+        ok: true,
+        status: 200,
+        data: {
+          users: userList
+        }
+      })
+    }
+    catch (error) {
+      response.send({
+        status: 'error',
+        mensaje: error.message
+      })
+    }
+  }
+)*/
+
+// Traer info de un cierto usuario por ID -->
+app.get('/api/users/:userId',
+  async (request, response) => {
+    try {
+      //Accedemos a los parametros de la URL -->
+      const userId = request.params.userId
+      const user = await userRepository.getById(userId)
+
+      if (!user) {
+        // Ponemos return para cortar la ejecucion de la funcion
+        return response.send({
+          message: 'Get user details successfully',
+          status: 404,
+          ok: false,
+          data: {
+            user: user
+          }
+        })
+      }
+      return response.send({
+        message: 'Get user details successfully',
+        status: 200,
+        ok: true,
+        data: {
+          user: user
+        }
+      })
+
+    } catch (error) {
+      return response.send({
+        status: 'error',
+        ok: false,
+        error: error.message
+      })
+    }
+  }
+)
+
+
 /*
 Si me hacen un GET a la direccion '/api/atatus' activar tal funcion -->
-*/
 app.get('/api/status',
   (request, response) => {
     response.send('<h1> Request recibida </h1>')
   }
+)*/
 
-)
+/*
+En el protocolo HTTP hay metodos de consulta:
+  GET : obtener recursos del servidor
+  POST : enviar recursos al servidor
+  PUT : actualizar un recurso del servidor
+  DELETE : eliminar un recurso del servidor
 
+Los metodos/verbos son teoricos, es decir teoricamente le GET debe traer recursos pero REALMENTE quien define que hace el GET...DELETE es en ultima instancia el programador
+*/
 app.listen(
   // Si fuinciono el listen del server entonces se ejecutara esta funcion
   PORT,

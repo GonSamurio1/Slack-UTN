@@ -1,6 +1,8 @@
 /*
 Un repository es donde manejamos la comunicacion con nuestros datos (Generalmente la DB)
  */
+import User from "../models/users.models.js";
+import WorkSpace from "../models/workspace.model.js";
 
 class UserRepository {
 
