@@ -2,7 +2,6 @@
 Un repository es donde manejamos la comunicacion con nuestros datos (Generalmente la DB)
  */
 import User from "../models/users.models.js";
-import WorkSpace from "../models/workspace.model.js";
 
 class UserRepository {
 
@@ -13,16 +12,9 @@ class UserRepository {
       email: email,
       password: password
     })
-    console.log(result)
+    return result
   }
-  // WORKSPACES -->
-  async createWorkSpace(nombre, descripcion) {
-    const result = await WorkSpace.create({
-      nombre: nombre,
-      descripcion: descripcion
-    })
-    console.log(result)
-  }
+
   // ACTUALIZAR USER POR ID -->
   async softUpdateUserById(userId) {
     const result = await User.findByIdAndUpdate(userId, { activo: false })
@@ -44,7 +36,6 @@ class UserRepository {
   // FILTRAR POR ID -->
   async getById(userId) {
     const result = await User.findById(userId)
-    console.log(result)
     return result
   }
   // MUESTRA TODOS LOS USUARIOS QUE CUMPLAN CON EL TERMINO DADO -->

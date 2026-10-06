@@ -25,8 +25,6 @@ const memberSchema = new mongoose.Schema(
       default: Date.now
     }
   }
-
-  //Traer todos los miembros de un espacio de trabajo
 )
 
 export const MEMBER_COLLECTION_NAME = 'Miembro'
